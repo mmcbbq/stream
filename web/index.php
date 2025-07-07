@@ -16,7 +16,7 @@ try {
     echo "Connected successfully to MariaDB with PDO!<br>";
 
     // Query to list databases
-    $stmt = $pdo->query("SHOW DATABASES");
+    $stmt = $pdo->query("INSERT INTO test (id) values (1);");
 
     echo "Databases:<br>";
     while ($row = $stmt->fetch()) {
