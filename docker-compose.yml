@@ -1,0 +1,32 @@
+services:
+  srs:
+    build: ./stream
+    container_name: srs
+    ports:
+      - "1935:1935"
+      - "1985:1985"
+      - "8000:8000/udp"
+    environment:
+      - CANDIDATE=10.101.111.7
+  web:
+      build: ./web
+      container_name: php-apache
+      ports:
+        - "80:80"
+      volumes:
+        - ./web:/var/www/html
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: pw
+      MARIADB_DATABASE: stream
+      MARIADB_USER: user
+      MARIADB_PASSWORD: userpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:
