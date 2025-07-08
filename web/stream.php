@@ -1,3 +1,8 @@
+<?php
+$api = htmlspecialchars('http://'.$_ENV['CANDIDATE'].':1985/rtc/v1/play/');
+$stream = htmlspecialchars('webrtc://'.$_ENV['CANDIDATE'].'/live/livestream');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +10,8 @@
     <title>SRS WebRTC Stream</title>
 </head>
 <body>
+
+
 <h1>Live WebRTC Stream</h1>
 <video id="webrtc-video" autoplay playsinline controls muted width="640" height="360"></video>
 
@@ -12,8 +19,8 @@
     async function playStream() {
         const video = document.getElementById('webrtc-video');
 
-        const apiUrl = 'http://10.101.111.7:1985/rtc/v1/play/';
-        const streamUrl = 'webrtc://10.101.111.7/live/livestream';
+        const apiUrl = '<?php echo $api ?>';
+        const streamUrl = '<?php echo $stream ?>';
 
         const req = {
             api: apiUrl,
